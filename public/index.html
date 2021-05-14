@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Exercises for securityqa.ca/posts/methodologies-and-design-patterns/">
+    <meta name="theme-color" content="#FFF8EE">
+    <title>Methodologies and Patterns</title>
+    <!-- 
+    You can completely ignore /ignore-me.css. 
+    It's just some base styles.
+  -->
+    <link rel="stylesheet" href="/ignore-me.css">
+    <!-- 
+    This is the CSS file you'll want to edit for
+    this exercise.
+   -->
+    <link rel="stylesheet" href="/style.css">
+    <!-- 
+    This is the Javascript file you'll want to
+    edit for this exercise.
+   -->
+    <!-- <script type="module" src="/script.js"></script> -->
+    <script type="module" src="/script-solved.js"></script>
+</head>
+
+<body>
+    <h1>BEM & the Constructor Pattern Exercise</h1>
+    <hr>
+    <form id="starWarsCharacter" class="form">
+        <div class="input-group">
+            <label class="label" for="name">Name: </label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        <div class="input-group">
+            <label class="label" for="homeWorld">Homeworld: </label>
+            <input type="text" name="homeworld" id="homeWorld">
+        </div>
+        <div class="input-group">
+            <label class="label" for="birthYear">Birth year: </label>
+            <input type="number" name="birthyear" id="birthYear">
+        </div>
+        <div class="input-group">
+            <label class="label" for="info">Info: </label>
+            <input type="textarea" name="info" id="info">
+        </div>
+        <div class="input-group">
+          <span class="label">Are they canon?</span>
+            <input type="radio" id="isCanon" name="canonQuestion" value="canonYes">
+            <label class="label-for-radio-buttons" for="isCanon">Canon</label>
+            <input type="radio" id="isNotCanon" name="canonQuestion" value="canonNo">
+            <label class="label-for-radio-buttons" for="isNotCanon">Non-canon</label>
+        </div>
+        <div class="input-group">
+            <input type="submit" value="Add Character">
+        </div>
+    </form>
+    <hr>
+    <table>
+      <caption>Some Star Wars Characters</caption>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Homeworld</th>
+          <th>Birth year</th>
+          <th>Canonical status</th>
+          <th>Info</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        
+      </tbody>
+    </table>
+</body>
+
+</html>
