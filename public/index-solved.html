@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Exercises for securityqa.ca/posts/methodologies-and-design-patterns/">
+    <meta name="theme-color" content="#FFF8EE">
+    <title>Methodologies and Patterns</title>
+    <!-- 
+    You can completely ignore /ignore-me.css. 
+    It's just some base styles.
+  -->
+    <link rel="stylesheet" href="/ignore-me.css">
+    <!-- 
+    This is the CSS file you'll want to edit for
+    this exercise.
+   -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <h1>BEM & the Constructor Pattern Exercise</h1>
+    <hr>
+    <form id="starWarsCharacter" class="form">
+        <div class="input-group">
+            <label class="label" for="name">Name: </label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        <div class="input-group">
+            <label class="label" for="homeWorld">Homeworld: </label>
+            <input type="text" name="homeworld" id="homeWorld">
+        </div>
+        <div class="input-group">
+            <label class="label" for="birthYear">Birth year: </label>
+            <input type="number" name="birthyear" id="birthYear">
+        </div>
+        <div class="input-group">
+            <label class="label" for="info">Info: </label>
+            <input type="textarea" name="info" id="info">
+        </div>
+        <div class="input-group">
+          <span class="label">Are they canon?</span>
+            <input type="radio" id="isCanon" name="canonQuestion" value="canonYes">
+            <label class="label-for-radio-buttons" for="isCanon">Canon</label>
+            <input type="radio" id="isNotCanon" name="canonQuestion" value="canonNo">
+            <label class="label-for-radio-buttons" for="isNotCanon">Non-canon</label>
+        </div>
+        <div class="input-group">
+            <input type="submit" value="Add Character">
+        </div>
+    </form>
+    <hr>
+    <table>
+      <caption>Some Star Wars Characters</caption>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Homeworld</th>
+          <th>Birth year</th>
+          <th>Canonical status</th>
+          <th>Info</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        
+      </tbody>
+    </table>
+    <!-- 
+    This is the Javascript you'll want to edit for this exercise.
+   -->
+    <script>class Character {
+  constructor(name, homeWorld, birthYear, info, canon) {
+    this.name = name;
+    this.homeWorld = homeWorld;
+    this.birthYear = birthYear;
+    this.info = info;
+    this.canon = canon;
+  }
+}
+
+Character.prototype.formatCharacteristics = function() {
+    if (!this.birthYear) {
+      this.birthYear = "Unknown";
+    } else if (this.birthYear <= 0) {
+      this.birthYear = Math.abs(this.birthYear) + " BBY";
+    } else {
+      this.birthYear = this.birthYear + " ABY";
+    }
+
+    if (!this.canon) {
+      this.canon = "Unspecified";
+    } else if (this.canon === "canonYes") {
+      this.canon = "Canon";
+    } else if (this.canon === "canonNo") {
+      this.canon = "Disney says no";
+    } else {
+      console.error("Unknown value provided for canon question");
+    }
+
+    var formattedCharacter = {
+      name: this.name,
+      homeWorld: this.homeWorld,
+      birthYear: this.birthYear,
+      canon: this.canon,
+      info: this.info
+    };
+
+    return formattedCharacter;
+}
+
+var defaultCharacter = new Character("Chewbacca", "Kashyyyk", -200, "Chewbacca, known as Chewie, was a Wookiee warrior, smuggler, mechanic, pilot, and resistance fighter.", "canonYes");
+
+// Turns character properties into a formatted table row
+var addCharacter = function (character) {
+  var rowStart = "<tr>";
+  var rowEnd = "</tr>";
+  // Initialize an arry for the table cells
+  var cells = [];
+  // For each value in the character object,
+  // create an HTML table cell and push it
+  // into the `cells` array
+  Object.values(character).forEach((aspect) => {
+    cells.push("<td>" + aspect + "</td>");
+  });
+  // Insert the row into the table body
+  document.getElementById("tableBody").innerHTML +=
+    rowStart + cells.join("") + rowEnd;
+};
+
+// Add chewie on page load
+addCharacter(defaultCharacter.formatCharacteristics());
+
+// Get the form
+var form = document.getElementById("starWarsCharacter");
+// Get the form inputs
+var elements = form.elements;
+
+// When the form is submitted, add the new character
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  var newCharacter = new Character(elements.name.value,elements.homeWorld.value,elements.birthYear.value,elements.info.value,elements.canonQuestion.value);
+  addCharacter(newCharacter.formatCharacteristics());
+});
+</script>
+</body>
+
+</html>
