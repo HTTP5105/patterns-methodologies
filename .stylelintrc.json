@@ -1,0 +1,3 @@
+{ 
+  "extends": "@considonet/stylelint-config-bem"
+}

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "postcss": "./node_modules/.bin/postcss"
+    "stylelint": "stylelint './public/form.css'"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/HTTP5105/patterns-methodologies#readme",
   "devDependencies": {
+    "@considonet/stylelint-config-bem": "^1.0.1",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
     "jsdom": "16.5.3",
     "mocha": "^8.4.0",
-    "stylelint": "^13.13.1",
-    "stylelint-config-standard": "^22.0.0"
+    "stylelint": "^13.13.1"
   }
 }
